@@ -1,0 +1,80 @@
+{
+//"wireplumber", 
+  "layer": "top",
+  //"hyprland/window"
+  "modules-left": ["hyprland/workspaces", "cpu","temperature","memory"  ],
+  "modules-right": ["backlight","battery", "pulseaudio",
+      "tray", "custom/screenshot",
+      "clock", "custom/swaync"], 
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": true,
+    
+  },
+"clock": {
+        "format": "{:%H:%M %d/%m/%Y }"
+},
+
+
+
+"battery": {
+    "format": "{icon}   {capacity}% 🔋",
+    "format-icons": ["", "", "", "", ""],
+    "states": {
+        "warning": 30,
+        "critical": 15
+    }
+},
+
+"backlight": {
+    "device": "amdgpu_bl1", // hoặc card của bạn (xem ở /sys/class/backlight)
+    "format": "☀ {percent}%",
+    "tooltip-format": "Độ sáng màn hình: {percent}%"
+},
+
+"pulseaudio": {
+    "format": "🔊 {volume}% | Volume",
+    "format-bluetooth": "🎧 {volume}% | Tai nghe",
+    "format-muted": "🔇 Muted",
+    "tooltip-format": "Thiết bị: {desc}\nÂm lượng: {volume}%",
+     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+  "on-click-right": "pavucontrol"
+
+},
+
+"cpu": {
+  "interval": 2,
+  "format": "  {usage}%",
+  "tooltip-format": "Core {core}: {usage}%",
+  "max-length": 20
+},
+"memory": {
+  "interval": 5,
+  "format": " {used:0.1f}G / {total:0.1f}G",
+  "tooltip-format": "Mem: {used:0.1f}G / {total:0.1f}G ({percentage}%)",
+  "max-length": 25
+},
+
+"temperature": {
+  "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input", 
+  "critical-threshold": 80,
+  "format": "🌡 {temperatureC}°C",
+  "tooltip-format": "{temperatureC}°C",
+  "interval": 5
+},
+
+"custom/swaync": {
+  "format": " {}",
+  "exec": "swaync-client -c",
+  "on-click": "swaync-client -t"
+},
+
+"custom/screenshot":{
+    "format": "screenshot",
+    "on-click": "hyprshot-gui"
+}
+
+
+}
+
